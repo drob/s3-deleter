@@ -3,7 +3,7 @@ S3-Deleter
 
 A writable stream that batch-deletes files from s3, via the excellent [knox]. Designed for use with [s3-lister].
 
-[knox]: https://npmjs.org/LearnBoost/knox
+[knox]: https://npmjs.org/package/knox
 [s3-lister]: https://npmjs.org/package/s3-lister
 
 ## Usage
