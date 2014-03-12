@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "A writable stream that deletes files from S3 via knox",
   "main": "lib/index.js",
-  "repository": "https://github.com/drob/s3-deleter.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drob/s3-deleter.git"
+  },
   "author": "Dan Robinson <dan@drob.us>",
   "license": "MIT",
   "dependencies": {
@@ -18,6 +21,19 @@
     "s3-lister": "^0.1.0"
   },
   "scripts": {
+    "prepublish": "coffee -o lib -c src/index.coffee",
     "test": "mocha --compilers coffee:coffee-script test/test.coffee"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/drob/s3-deleter/issues"
+  },
+  "homepage": "https://github.com/drob/s3-deleter",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "s3",
+    "delete",
+    "stream"
+  ]
 }
