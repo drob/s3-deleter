@@ -1,6 +1,6 @@
 {
   "name": "s3-deleter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A writable stream that deletes files from S3 via knox",
   "main": "lib/index.js",
   "repository": {
