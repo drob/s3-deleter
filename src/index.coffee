@@ -7,10 +7,13 @@ module.exports = class S3Deleter extends Writable
   constructor: (client, options) ->
     @client = client
     @deleteQueue = []
-    @batchSize = options?.batchSize ? MAX_BATCH_SIZE
+
+    options ?= {}
+    @batchSize = options.batchSize ? MAX_BATCH_SIZE
     if @batchSize > MAX_BATCH_SIZE
       throw Error "Not allowed to delete more than #{MAX_BATCH_SIZE} items at once."
-    super { objectMode: true }
+    options.objectMode = true
+    super options
 
   _write: (file, enc, callback) ->
     # If we're all done, delete whatever's left in our queue.

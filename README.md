@@ -31,7 +31,7 @@ lister.pipe(deleter);
 * client - a knox client
 * options - hash of options
 
-Supported options:
+In addition to the standard writable stream settings, `S3Deleter` supports:
 * batchSize - size of batches to delete at a time, up to 1000
 
 ## Running Tests
