@@ -6,11 +6,12 @@ A writable stream that batch-deletes files from s3, via the excellent [knox]. De
 [knox]: https://npmjs.org/package/knox
 [s3-lister]: https://npmjs.org/package/s3-lister
 
-## Usage
+## Examples
 
+These code snippets show some of the things you can do with two streams and a knox client.
+
+Deleting all the files in a folder:
 ```javascript
-// Delete all the files in a folder.
-
 var client = knox.createClient({
   key    : '<api-key-here>',
   secret : '<secret-here>',
@@ -26,7 +27,35 @@ deleter
 lister.pipe(deleter);
 ```
 
-### new S3Deleter(client, options)
+Deleting all the files in a bucket that are more than one week old:
+```javascript
+var client = knox.createClient({
+  key    : '<api-key-here>',
+  secret : '<secret-here>',
+  bucket : 'great-bucket'
+});
+
+var lister = new S3Lister(client);
+var deleter = new S3Deleter(client);
+
+deleter
+  .on('error',  function (err) { console.log('Error!!', err); })
+  .on('finish', function ()    { console.log 'All done!' });
+
+var oneWeekAgo = Date.now() - 1000 * 60 * 60 * 24 * 7;
+lister
+  .on('error', function (err)  { console.log('Error!!', err); })
+  .on('end',   function ()     { deleter.end(); })
+  .on('data',  function (file) {
+    if (parseInt(file.LastModified) < oneWeekAgo) {
+      deleter.write(file);
+    }
+  });
+```
+
+## Usage
+
+#### new S3Deleter(client, options)
 
 * client - a knox client
 * options - hash of options
