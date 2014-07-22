@@ -1,9 +1,9 @@
-assert    = require 'assert'
-async     = require 'async'
-auth      = require './auth.json'
-knox      = require 'knox'
+assert = require 'assert'
+async = require 'async'
+auth = require './auth.json'
+knox = require 'knox'
 S3Deleter = require '../'
-S3Lister  = require 's3-lister'
+S3Lister = require 's3-lister'
 
 client = knox.createClient auth
 folder = '_s3-deleter-test'
@@ -48,3 +48,12 @@ describe 'S3Deleter', () ->
 
   it 'should delete all the files when multiple batches are present', (done) ->
     async.series [deleteFiles, assertFolderEmpty], done
+
+  it 'should handle a case in which an empty stream is piped', (done) ->
+    deleteFiles done
+
+  it 'should handle ends before any stream writes', (done) ->
+    deleter = new S3Deleter client
+    deleter.on 'error', done
+    deleter.on 'finish', done
+    deleter.end()
