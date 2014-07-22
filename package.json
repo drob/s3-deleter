@@ -22,7 +22,7 @@
   },
   "scripts": {
     "prepublish": "coffee -o lib -c src/index.coffee",
-    "test": "mocha --compilers coffee:coffee-script test/test.coffee"
+    "test": "mocha test/test.coffee"
   },
   "bugs": {
     "url": "https://github.com/drob/s3-deleter/issues"
