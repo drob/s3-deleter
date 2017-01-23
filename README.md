@@ -23,7 +23,7 @@ var deleter = new S3Deleter(client);
 
 deleter
   .on('error',  function (err) { console.log('Error!!', err); })
-  .on('finish', function ()    { console.log 'All done!' });
+  .on('finish', function ()    { console.log('All done!'); });
 lister.pipe(deleter);
 ```
 
@@ -40,7 +40,7 @@ var deleter = new S3Deleter(client);
 
 deleter
   .on('error',  function (err) { console.log('Error!!', err); })
-  .on('finish', function ()    { console.log 'All done!' });
+  .on('finish', function ()    { console.log('All done!'); });
 
 var oneWeekAgo = Date.now() - 1000 * 60 * 60 * 24 * 7;
 lister
